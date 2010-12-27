@@ -1,0 +1,5 @@
+Control Cursor Left - Esc + H (move cursor to the beginning of input)
+Control Cursor Right - Esc + W (move cursor all the way to the right/end of
+input)
+Option Cursor Left - Esc + b (move one word left)
+Option Cursor Right - Esc + f (move one word right)
