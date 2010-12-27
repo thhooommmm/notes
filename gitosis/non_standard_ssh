@@ -1,0 +1,9 @@
+Non-standard SSH port
+
+If you run SSH on a non-standard port on your server, don't use the syntax
+"git@myserver.com:1234:/foo/bar", it won't work. Putting the port in the URL
+doesn't seem to make gitosis, or git, (not sure which) happy. Instead, put this
+in your ~/.ssh/config file:
+
+Host myserver.com
+  Port 1234

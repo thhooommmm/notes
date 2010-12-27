@@ -1,0 +1,48 @@
+Creating new repositories
+
+This is where the fun starts. Let's create a new repository to hold our project
+codenamed FreeMonkey.
+
+Open up gitosis.conf and notice the default configuration:
+
+[gitosis]                  
+
+[group gitosis-admin]
+writable = gitosis-admin
+members = jdoe                     
+
+Your "members" line will hold your key filename (without the .pub extension)
+that is in keydir/. In my example, it is "jdoe", but for you it'll probably be
+a combination of your username and hostname.
+
+To create a new repo, we just authorize writing to it and push. To do so, add
+this to gitosis.conf:
+
+[group myteam]
+members = jdoe
+writable = free_monkey
+
+This defines a new group called "myteam", which is an arbitrary string. "jdoe"
+is a member of myteam and will have write access to the "free_monkey" repo.
+
+Save this addition to gitosis.conf, commit and push it:
+
+git commit -a -m "Allow jdoe write access to free_monkey"
+git push
+
+Now the user "jdoe" has access to write to the repo named "free_monkey", but we
+still haven't created a repo yet. What we will do is create a new repo locally,
+and then push it:
+
+mkdir free_monkey
+cd free_monkey
+git init
+git remote add origin git@YOUR_SERVER_HOSTNAME:free_monkey.git
+
+# do some work, git add and commit files
+
+git push origin master:refs/heads/master
+
+With the final push, you're off to the races. The repository "free_monkey" has
+been created on the server (in /home/git/repositories) and you're ready to
+start using it like any ol' git repo. 

@@ -1,0 +1,33 @@
+Adding users
+
+The next natural thing to do is to grant some lucky few commit access to the
+FreeMonkey project. This is a simple two step process.
+
+First, gather their public SSH keys, which I'll call "alice.pub" and "bob.pub",
+and drop them into keydir/ of your local gitosis-admin repository. Second, edit
+gitosis.conf and add them to the "members" list.
+
+cd gitosis-admin
+cp ~/alice.pub keydir/
+cp ~/bob.pub keydir/
+git add keydir/alice.pub keydir/bob.pub
+
+Note that the key filename must have a ".pub" extension.
+
+gitosis.conf changes:
+
+ [group myteam]
+ - members = jdoe
+ + members = jdoe alice bob
+   writable = free_monkey
+
+   Commit and push:
+
+   git commit -a -m "Granted Alice and Bob commit rights to FreeMonkey"
+   git push
+
+   That's it. Alice and Bob can now clone the free_monkey repository like so:
+
+   git clone git@YOUR_SERVER_HOSTNAME:free_monkey.git
+
+   Alice and Bob will also have commit rights. 
